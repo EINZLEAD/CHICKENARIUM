@@ -1,0 +1,46 @@
+/* media.css — responsive & adjustable rules for CHICKENARIUM login */
+:root{
+  --scale: 1;
+}
+/* Base accessibility scaling (affects rem-based sizes) */
+html{font-size:calc(16px * var(--scale));}
+
+/* small devices: make inputs larger and stack more tightly */
+@media (max-width:480px){
+  :root{--scale:0.95}
+  .page{padding:18px}
+  .card{padding:18px;border-radius:12px}
+  .chicken-svg{width:64px;height:52px}
+  .brand h1{font-size:1.15rem}
+  .login-form input{padding:14px}
+  .btn{padding:12px 14px;border-radius:10px}
+  .decor{gap:8px}
+}
+
+/* medium devices */
+@media (min-width:481px) and (max-width:880px){
+  :root{--scale:0.98}
+  .card{width:90%}
+}
+
+/* larger devices - slight upscale */
+@media (min-width:881px){
+  :root{--scale:1}
+  .card{width:420px}
+}
+
+/* landscape phones: make form centered and comfortable */
+@media (orientation:landscape) and (max-width:760px){
+  .page{align-items:center;padding:12px}
+  .card{padding:20px}
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce){
+  .card.shake{animation:none}
+}
+
+/* Utility: helper class to increase overall scale if user wants larger UI */
+.scale-large{--scale:1.12}
+.scale-medium{--scale:1.06}
+.scale-small{--scale:0.90}
