@@ -1,37 +1,60 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Settings — CHICKENARIUM</title>
-  <link rel="stylesheet" href="Navbar.css" />
-  <style>body{font-family:Inter,Segoe UI,Arial,sans-serif;margin:0;background:#FFFBF2;color:#222}.container{max-width:1000px;margin:0 auto;padding:20px}</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Settings — CHICKENARIUM</title>
+<link rel="stylesheet" href="Navbar.css">
+<style>
+body{font-family:Inter,Segoe UI,Arial,sans-serif;margin:0;background:#FFFBF2;color:#222}
+.container{max-width:1000px;margin:0 auto;padding:20px}
+form{background:#fff8f0;padding:20px;border-radius:8px;border:1px solid #ccc}
+label{display:block;margin-top:15px;font-weight:600}
+input{width:100%;padding:10px;margin-top:5px;border-radius:5px;border:1px solid #ccc}
+button{margin-top:20px;padding:12px 20px;border:none;border-radius:6px;background:#ff9800;color:#222;font-size:16px;cursor:pointer}
+button:hover{background:#f57c00}
+.status{margin-top:15px;font-weight:bold;color:green}
+.status.error{color:red}
+</style>
 </head>
 <body>
-  <header class="topnav">
-    <div class="container nav-inner">
-      <a class="brand" href="home.html">🐔 CHICKENARIUM</a>
-      <button id="menuBtn" class="menu-btn" aria-label="Toggle menu">☰</button>
-      <nav id="siteNav" class="nav-links" aria-label="Main navigation">
-        <a href="Fpage.html">Home</a>
-        <a href="monitoring.html">Monitoring</a>
-        <a href="history.html">History</a>
-        <a href="settings.html" class="active">Settings</a>
-      </nav>
-    </div>
-  </header>
 
-  <main class="container">
-    <h1>Settings</h1>
-    <p>Configure alerts, farms, and user access from this page.</p>
-  </main>
+<header class="topnav">
+  <div class="container nav-inner">
+    <a class="brand" href="home.html">🐔 CHICKENARIUM</a>
+    <button id="menuBtn" class="menu-btn">☰</button>
+    <nav id="siteNav" class="nav-links">
+      <a href="Fpage.html">Home</a>
+      <a href="monitoring.html">Monitoring</a>
+      <a href="history.html">History</a>
+      <a href="settings.html" class="active">Settings</a>
+    </nav>
+  </div>
+</header>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', ()=>{
-      const btn = document.getElementById('menuBtn');
-      const nav = document.getElementById('siteNav');
-      btn.addEventListener('click', ()=> nav.classList.toggle('open'));
-    });
-  </script>
+<main class="container">
+  <h1>Settings</h1>
+  <form id="settingsForm">
+    <label>Farm Name</label>
+    <input type="text" id="farm_name" required>
+
+    <label>Owner Name</label>
+    <input type="text" id="owner_name" required>
+
+    <label>Owner Phone (SMS)</label>
+    <input type="text" id="owner_phone" required>
+
+    <label>Owner Email</label>
+    <input type="email" id="owner_email" required>
+
+    <label>Suspected Threshold</label>
+    <input type="number" id="suspected_threshold" min="1" required>
+
+    <button type="submit">Save Settings</button>
+  </form>
+  <p id="msg" class="status"></p>
+</main>
+
+<script src="settings.js"></script>
 </body>
 </html>

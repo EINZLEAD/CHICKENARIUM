@@ -6,173 +6,65 @@
   <title>Monitoring — CHICKENARIUM</title>
   <link rel="stylesheet" href="Navbar.css" />
   <style>
-    body {
-      font-family:Inter,Segoe UI,Arial,sans-serif;
-      margin:0;
-      background:#FFFBF2;
-      color:#222;
-    }
-    .container {
-      max-width:1000px;
-      margin:0 auto;
-      padding:20px;
-    }
-    .video-container {
-      text-align:center;
-      margin-bottom: 20px;
-    }
-    video {
-      width: 100%;
-      max-width: 800px;
-      border: 2px solid #ccc;
-      border-radius: 8px;
-      background: #000;
-    }
-    .status-banner {
-      background-color: #d4edda; /* green for healthy by default */
-      color: #155724;
-      padding: 15px;
-      border-radius: 8px;
-      border: 1px solid #c3e6cb;
-      font-size: 18px;
-      margin-bottom: 10px;
-    }
-    .status-banner.problem {
-      background-color: #f8d7da; /* red for problem */
-      color: #721c24;
-      border-color: #f5c6cb;
-    }
-    .summary {
-      background: #fff8f0;
-      padding: 15px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      margin-bottom: 20px;
-      font-size: 18px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    table, th, td {
-      border: 1px solid #ccc;
-    }
-    th, td {
-      padding: 10px;
-      text-align: left;
-    }
-    th {
-      background-color: #f2e5d5;
-    }
-    tbody tr:nth-child(even) {
-      background-color: #fff8f0;
-    }
-    tbody tr:hover {
-      background-color: #ffe0b2;
-    }
+    body{font-family:Inter,Segoe UI,Arial,sans-serif;margin:0;background:#FFFBF2;color:#222}
+    .container{max-width:1000px;margin:0 auto;padding:20px}
+    .video-container{text-align:center;margin-bottom:20px}
+    video{width:100%;max-width:800px;border:2px solid #ccc;border-radius:8px}
+    .status-banner{padding:15px;border-radius:8px;margin-bottom:10px;font-size:18px;background:#d4edda}
+    .status-banner.problem{background:#f8d7da}
+    .summary{background:#fff8f0;padding:15px;border-radius:8px;border:1px solid #ccc;margin-bottom:20px}
+    table{width:100%;border-collapse:collapse}
+    table,th,td{border:1px solid #ccc}
+    th,td{padding:10px}
+    th{background:#f2e5d5}
   </style>
 </head>
 <body>
-  <header class="topnav">
-    <div class="container nav-inner">
-      <a class="brand" href="home.html">🐔 CHICKENARIUM</a>
-      <button id="menuBtn" class="menu-btn" aria-label="Toggle menu">☰</button>
-      <nav id="siteNav" class="nav-links" aria-label="Main navigation">
-        <a href="Fpage.html">Home</a>
-        <a href="monitoring.html" class="active">Monitoring</a>
-        <a href="history.html">History</a>
-        <a href="settings.html">Settings</a>
-      </nav>
-    </div>
-  </header>
 
-  <main class="container">
-    <h1>Monitoring</h1>
-    <p>Live monitoring of HPAI symptoms detected in chickens.</p>
+<header class="topnav">
+  <div class="container nav-inner">
+    <a class="brand" href="home.html">🐔 CHICKENARIUM</a>
+    <button id="menuBtn" class="menu-btn">☰</button>
+    <nav id="siteNav" class="nav-links">
+      <a href="Fpage.html">Home</a>
+      <a href="monitoring.html" class="active">Monitoring</a>
+      <a href="history.html">History</a>
+      <a href="settings.html">Settings</a>
+    </nav>
+  </div>
+</header>
 
-    <!-- Live Camera Feed -->
-    <div class="video-container">
-      <h2>Live Chicken Feed</h2>
-      <video id="chickenVideo" autoplay muted playsinline>
-        <!-- Replace source with your camera stream URL -->
-        <source src="http://YOUR_CAMERA_IP:PORT/stream" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-    </div>
+<main class="container">
+  <h1>Monitoring</h1>
 
-    <!-- Farm Status -->
-    <div id="farmStatus" class="status-banner">
-      Farm Status: Healthy
-    </div>
+  <div class="video-container">
+    <h2>Live Chicken Feed</h2>
+    <video autoplay muted playsinline>
+      <source src="http://YOUR_CAMERA_IP/stream" type="video/mp4">
+    </video>
+  </div>
 
+  <div id="farmStatus" class="status-banner">Farm Status: Healthy</div>
 
-    <div class="summary">
-      Total Suspected Chickens: <span id="suspectedCount">0</span>
-    </div>
+  <div class="summary">
+    Total Suspected Chickens: <span id="suspectedCount">0</span>
+  </div>
 
-    <table id="monitoringTable">
-      <thead>
-        <tr>
-          <th>Time</th>
-          <th>Health Status</th>
-          <th>Symptoms</th>
-          <th>Remarks</th>
-        </tr>
-      </thead>
-      <tbody id="monitoringBody">
-        <tr>
-          <td>2026-01-24 08:15:12</td>
-          <td>NORMAL</td>
-          <td>None</td>
-          <td>All chickens healthy</td>
-        </tr>
-        <tr>
-          <td>2026-01-24 09:02:45</td>
-          <td>SUSPECTED</td>
-          <td>Coughing, Lethargy, Nasal discharge</td>
-          <td>Immediate check recommended</td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
+  <table>
+    <thead>
+      <tr>
+        <th>Time</th>
+        <th>Status</th>
+        <th>Symptoms</th>
+        <th>Remarks</th>
+      </tr>
+    </thead>
+    <tbody id="monitoringBody">
+      <tr><td colspan="4">Loading data...</td></tr>
+    </tbody>
+  </table>
+</main>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', ()=>{
-      const btn = document.getElementById('menuBtn');
-      const nav = document.getElementById('siteNav');
-      btn.addEventListener('click', ()=> nav.classList.toggle('open'));
-    });
-
-    //update suspected count & farm status
-    function addMonitoringRow(time, status, symptoms, remarks) {
-      const tbody = document.getElementById('monitoringBody');
-      const row = document.createElement('tr');
-      row.innerHTML = `
-        <td>${time}</td>
-        <td>${status}</td>
-        <td>${symptoms}</td>
-        <td>${remarks}</td>
-      `;
-      tbody.prepend(row); 
-
-      // Update suspected count
-      const countEl = document.getElementById('suspectedCount');
-      if(status.toUpperCase() === 'SUSPECTED') {
-        countEl.textContent = parseInt(countEl.textContent) + 1;
-      }
-
-      // Update farm status
-      const farmStatusEl = document.getElementById('farmStatus');
-      if(parseInt(countEl.textContent) > 0) {
-        farmStatusEl.textContent = 'Farm Status: Problem Detected';
-        farmStatusEl.classList.add('problem');
-      } else {
-        farmStatusEl.textContent = 'Farm Status: Healthy';
-        farmStatusEl.classList.remove('problem');
-      }
-    }
-
-    
-  </script>
+<script src="js/monitoring.js"></script>
 </body>
 </html>
