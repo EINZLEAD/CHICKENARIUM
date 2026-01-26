@@ -17,6 +17,16 @@
     table,th,td{border:1px solid #ccc}
     th,td{padding:10px}
     th{background:#f2e5d5}
+      .footer-inner{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px
+    }
+    .footer-inner a{
+      color:var(--accent-dark);
+      text-decoration:none
+    }
   </style>
 </head>
 <body>
@@ -64,6 +74,12 @@
     </tbody>
   </table>
 </main>
+<footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© CHICKENARIUM — Research project on HPAI and poultry resilience in the Philippines.</p>
+      <p>Contact: <a href="mailto:team@chickenarium.local">team@chickenarium.local</a></p>
+    </div>
+</footer>
 
 <script src="js/monitoring.js"></script>
 </body>
