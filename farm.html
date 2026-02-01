@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Settings — CHICKENARIUM</title>
+<link rel="stylesheet" href="Navbar.css">
+<link rel="stylesheet" href="farm.css">
+</head>
+<body>
+
+<header class="topnav">
+  <div class="container nav-inner">
+    <a class="brand" href="home.html">🐔 CHICKENARIUM</a>
+    <button id="menuBtn" class="menu-btn">☰</button>
+    <nav id="siteNav" class="nav-links">
+      <a href="Fpage.html">Home</a>
+      <a href="monitoring.html">Monitoring</a>
+      <a href="history.html">History</a>
+      <a href="farm.html" class="active">Farm</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <h1>Farm <Details></Details></h1>
+  <form id="settingsForm">
+    <label>Farm Name</label>
+    <input type="text" id="farm_name" required>
+
+    <label>Owner Name</label>
+    <input type="text" id="owner_name" required>
+
+    <label>Owner Phone (SMS)</label>
+    <input type="text" id="owner_phone" required>
+
+    <label>Owner Email</label>
+    <input type="email" id="owner_email" required>
+
+    <label>Suspected Threshold</label>
+    <input type="number" id="suspected_threshold" min="1" required>
+
+    <label>Farm Location / Address</label>
+    <textarea id="farm_location" rows="3" placeholder="Street, city, region" ></textarea>
+
+    <label>Timezone</label>
+    <select id="timezone">
+      <option value="UTC">UTC</option>
+      <option value="America/New_York">America/New_York</option>
+      <option value="Europe/London">Europe/London</option>
+      <option value="Asia/Tokyo">Asia/Tokyo</option>
+    </select>
+
+    <label>Measurement Units</label>
+    <select id="units">
+      <option value="metric">Metric</option>
+      <option value="imperial">Imperial</option>
+    </select>
+
+    <label>Notifications</label>
+    <div class="checkbox-row">
+      <label><input type="checkbox" id="notify_sms"> SMS</label>
+      <label><input type="checkbox" id="notify_email"> Email</label>
+      <label><input type="checkbox" id="notify_push"> Push</label>
+    </div>
+
+    <label>Sampling Interval (seconds)</label>
+    <input type="number" id="sampling_interval" min="1" value="60">
+
+    <label><input type="checkbox" id="enable_alerts"> Enable Alerts</label>
+
+    <button type="submit">Save Settings</button>
+  </form>
+  <p id="msg" class="status"></p>
+</main>
+
+<script src="farm.js"></script>
+</body>
+</html>
