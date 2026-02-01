@@ -18,13 +18,16 @@
       <a href="monitoring.html">Monitoring</a>
       <a href="history.html">History</a>
       <a href="farm.html" class="active">Farm</a>
+      <a href="settings.html">Settings</a>
     </nav>
   </div>
 </header>
 
 <main class="container">
   <h1>Farm Details</h1>
+
   <form id="settingsForm">
+
     <label>Farm Name</label>
     <input type="text" id="farm_name" required>
 
@@ -37,10 +40,11 @@
     <label>Owner Email</label>
     <input type="email" id="owner_email" required>
 
-
+    <label>Suspected Threshold</label>
+    <input type="number" id="suspected_threshold" min="1" required>
 
     <label>Farm Location / Address</label>
-    <textarea id="farm_location" rows="3" placeholder="Street, city, region" ></textarea>
+    <textarea id="farm_location" rows="3" placeholder="Street, city, region"></textarea>
 
     <label>Timezone</label>
     <select id="timezone">
@@ -63,16 +67,26 @@
       <label><input type="checkbox" id="notify_push"> Push</label>
     </div>
 
-    <label>Sampling Interval (seconds)</label>
-    <input type="number" id="sampling_interval" min="1" value="60">
-
-    <label><input type="checkbox" id="enable_alerts"> Enable Alerts</label>
+    <label>
+      <input type="checkbox" id="enable_alerts">
+      Enable Alerts
+    </label>
 
     <button type="submit">Save Settings</button>
   </form>
+
   <p id="msg" class="status"></p>
 </main>
 
 <script src="farm.js"></script>
+
+<script>
+  // Mobile menu toggle
+  document.getElementById("menuBtn")
+    ?.addEventListener("click", () =>
+      document.getElementById("siteNav").classList.toggle("open")
+    );
+</script>
+
 </body>
 </html>

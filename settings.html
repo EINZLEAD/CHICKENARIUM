@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Settings — CHICKENARIUM</title>
+<link rel="stylesheet" href="Navbar.css">
+
+<style>
+body{
+  font-family:Inter,Segoe UI,Arial,sans-serif;
+  margin:0;
+  background:#FFFBF2;
+  color:#222;
+}
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:20px;
+}
+.section{
+  background:#fff;
+  border-radius:10px;
+  padding:20px;
+  margin-bottom:20px;
+  box-shadow:0 4px 10px rgba(0,0,0,.05);
+}
+.section h2{
+  margin-top:0;
+  border-bottom:1px solid #eee;
+  padding-bottom:8px;
+}
+label{
+  display:block;
+  margin-top:12px;
+  font-weight:600;
+}
+input, select, textarea{
+  width:100%;
+  padding:10px;
+  margin-top:4px;
+  border-radius:6px;
+  border:1px solid #ccc;
+}
+input[readonly]{
+  background:#f4f4f4;
+}
+.actions{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:20px;
+}
+button{
+  padding:10px 18px;
+  border:none;
+  border-radius:6px;
+  font-weight:600;
+  cursor:pointer;
+}
+.save-btn{
+  background:#F7941E;
+  color:#fff;
+}
+.logout-btn{
+  background:#e53935;
+  color:#fff;
+}
+.small{
+  font-size:.85rem;
+  color:#666;
+}
+</style>
+</head>
+
+<body>
+
+<header class="topnav">
+<div class="container nav-inner">
+  <a class="brand" href="Fpage.html">🐔 CHICKENARIUM</a>
+  <button id="menuBtn" class="menu-btn">☰</button>
+  <nav id="siteNav" class="nav-links">
+    <a href="Fpage.html">Home</a>
+    <a href="monitoring.html">Monitoring</a>
+    <a href="history.html">History</a>
+    <a href="farm.html">Farm</a>
+    <a href="settings.html" class="active">Settings</a>
+  </nav>
+</div>
+</header>
+
+<main class="container">
+
+<h1>Farm Profile & Settings</h1>
+
+<!-- FARM PROFILE -->
+<div class="section">
+<h2>Farm Information</h2>
+
+<label>Farm Name</label>
+<input type="text" value="Sample Poultry Farm">
+
+<label>Farm ID</label>
+<input type="text" value="FARM-2025-001" readonly>
+
+<label>Farm Type</label>
+<select>
+  <option>Broiler</option>
+  <option>Layer</option>
+  <option>Backyard</option>
+</select>
+
+<label>Number of Chickens</label>
+<input type="number" value="500">
+
+<label>Farm Address</label>
+<textarea rows="3">Barangay Example, City, Province</textarea>
+</div>
+
+<!-- OWNER INFO -->
+<div class="section">
+<h2>Owner / Account</h2>
+
+<label>Owner Name</label>
+<input type="text" value="Juan Dela Cruz">
+
+<label>Email</label>
+<input type="email" value="juan@email.com">
+
+<label>Contact Number</label>
+<input type="text" value="+63 9XX XXX XXXX">
+
+<label>Username</label>
+<input type="text" value="farm_admin" readonly>
+</div>
+
+<!-- SYSTEM INFO -->
+<div class="section">
+<h2>System Information</h2>
+
+<p class="small"><strong>Connected Devices:</strong> Camera, Directional Microphone</p>
+<p class="small"><strong>Last Detection:</strong> 2026-01-30 14:32</p>
+<p class="small"><strong>System Status:</strong> Online</p>
+</div>
+
+<!-- SECURITY -->
+<div class="section">
+<h2>Security</h2>
+
+<label>Change Password</label>
+<input type="password" placeholder="New password">
+
+<div class="actions">
+  <button class="save-btn">Save Changes</button>
+  <button class="logout-btn" onclick="logout()">Logout</button>
+</div>
+</div>
+
+</main>
+
+<script>
+document.getElementById("menuBtn")
+ ?.addEventListener("click",()=>siteNav.classList.toggle("open"));
+
+function logout(){
+  if(confirm("Are you sure you want to logout?")){
+    // Example only — replace with real backend logout
+    window.location.href = "login.html";
+  }
+}
+</script>
+
+</body>
+</html>
