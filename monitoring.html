@@ -4,135 +4,40 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Monitoring — CHICKENARIUM</title>
-  <link rel="stylesheet" href="Navbar.css" />
-
+  
+  <link rel="stylesheet" href="css/Navbar.css" />
+  <link rel="stylesheet" href="css/monitoring.css" /> 
+  
   <style>
-    body {
-      font-family: Inter, Segoe UI, Arial, sans-serif;
-      margin: 0;
-      background: #FFFBF2;
-      color: #222;
-    }
-
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    /* VIDEO */
-    .video-container {
-      text-align: center;
-      margin-bottom: 25px;
-    }
-
-    .video-wrapper {
-      width: 100%;
-      max-width: 900px;
-      margin: 0 auto;
-      background-color: #000;
-      border-radius: 12px;
-      overflow: hidden;
-      aspect-ratio: 16 / 9;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    }
-
-    video {
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: cover;
-    }
-
+    /* CSS FOR STATUS COLORS & ANIMATIONS */
+    .text-critical { color: red; font-weight: bold; }
+    .text-warning { color: orange; font-weight: bold; }
+    .text-healthy { color: green; font-weight: bold; }
+    
+    /* Farm Status Banner */
+    .status-banner { padding: 15px; background: #d4edda; color: #155724; border: 1px solid #c3e6cb; border-radius: 5px; margin-bottom: 20px; font-weight: bold; text-align: center; transition: all 0.3s ease; }
+    .status-banner.critical { background: #f8d7da; color: #721c24; border-color: #f5c6cb; animation: pulseRed 1s infinite; }
+    .status-banner.warning { background: #fff3cd; color: #856404; border-color: #ffeeba; }
+    
     /* ZONE GRID */
-    .zone-wrapper {
-      max-width: 300px;
-      margin: 25px auto;
-      text-align: center;
+    .zone-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px; }
+    .zone { 
+        border: 2px solid #ddd; padding: 20px; text-align: center; font-weight: bold; border-radius: 8px; background: #f9f9f9; transition: 0.3s; 
     }
 
-    .zone-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
+    /* ACTIVE ZONES */
+    .zone.active-warning { 
+        background-color: #ffc107 !important; color: #000 !important; border-color: #e0a800 !important; 
+    }
+    .zone.active-critical { 
+        background-color: #dc3545 !important; color: white !important; border-color: #bd2130 !important; 
+        animation: blinkZone 1s infinite; box-shadow: 0 0 15px rgba(220, 53, 69, 0.6);
     }
 
-    .zone {
-      padding: 18px;
-      border-radius: 6px;
-      background: #eee;
-      font-weight: bold;
-      color: #555;
-    }
-
-    .zone.active {
-      background: #f44336;
-      color: #fff;
-      animation: pulse 1s infinite;
-    }
-
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(244,67,54,0.7); }
-      100% { box-shadow: 0 0 0 14px rgba(244,67,54,0); }
-    }
-
-    /* STATUS */
-    .status-banner {
-      padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 15px;
-      font-size: 18px;
-      background: #d4edda;
-      border: 1px solid #c3e6cb;
-      color: #155724;
-    }
-
-    .status-banner.problem {
-      background: #f8d7da;
-      border-color: #f5c6cb;
-      color: #721c24;
-    }
-
-    /* TABLE */
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background: #fff;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    }
-
-    th, td {
-      padding: 12px 15px;
-      text-align: left;
-      border-bottom: 1px solid #eee;
-    }
-
-    th {
-      background: #f9f5ec;
-      font-weight: 600;
-      color: #444;
-    }
-
-    tr:last-child td {
-      border-bottom: none;
-    }
-
-    .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      margin-top: 40px;
-      padding-bottom: 20px;
-      color: #666;
-      font-size: 0.9rem;
-    }
-
-    .footer-inner a {
-      color: #F7941E;
-      text-decoration: none;
+    @keyframes blinkZone {
+        0% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.8; transform: scale(1.05); }
+        100% { opacity: 1; transform: scale(1); }
     }
   </style>
 </head>
@@ -141,7 +46,7 @@
 
 <header class="topnav">
   <div class="container nav-inner">
-    <a class="brand" href="home.html">🐔 CHICKENARIUM</a>
+    <a class="brand" href="Fpage.html">🐔 CHICKENARIUM</a>
     <button id="menuBtn" class="menu-btn">☰</button>
     <nav id="siteNav" class="nav-links">
       <a href="Fpage.html">Home</a>
@@ -156,7 +61,6 @@
 <main class="container">
   <h1>Monitoring Dashboard</h1>
 
-  <!-- VIDEO -->
   <div class="video-container">
     <div class="video-wrapper">
       <video autoplay muted playsinline controls>
@@ -164,11 +68,10 @@
       </video>
     </div>
     <p style="font-size:0.9rem;color:#666;margin-top:8px">
-      <span style="color:red">●</span> Live Stream
+      <span style="color:red; animation: blink 1s infinite;">●</span> Live Stream
     </p>
   </div>
 
-  <!-- ZONE GRID -->
   <div class="zone-wrapper">
     <strong>Detected Sound Location</strong>
     <div class="zone-grid">
@@ -184,12 +87,10 @@
     </div>
   </div>
 
-  <!-- STATUS -->
   <div id="farmStatus" class="status-banner">
-    Farm Status: Healthy
+    Farm Status: Waiting for data...
   </div>
 
-  <!-- TABLE -->
   <table>
     <thead>
       <tr>
@@ -201,8 +102,8 @@
     </thead>
     <tbody id="monitoringBody">
       <tr>
-        <td colspan="4" style="text-align:center;color:#888">
-          Waiting for detection events...
+        <td colspan="4" style="text-align:center;color:#888; padding: 20px;">
+          Initializing System...
         </td>
       </tr>
     </tbody>
@@ -212,76 +113,10 @@
 <footer class="site-footer">
   <div class="container footer-inner">
     <p>© CHICKENARIUM — Research project on Poultry Health Monitoring.</p>
-    <p>Contact: <a href="mailto:team@chickenarium.local">team@chickenarium.local</a></p>
   </div>
 </footer>
 
-<script>
-  // Mobile menu
-  document.getElementById("menuBtn")
-    ?.addEventListener("click", () =>
-      document.getElementById("siteNav").classList.toggle("open")
-    );
-
-  function clearZones(){
-    document.querySelectorAll(".zone")
-      .forEach(z => z.classList.remove("active"));
-  }
-
-  function highlight(zone){
-    clearZones();
-
-    const map = {
-      "A-B-C": ["A","B","C"],
-      "D-E-F": ["D","E","F"],
-      "G-H-I": ["G","H","I"]
-    };
-
-    if(map[zone]){
-      map[zone].forEach(id =>
-        document.getElementById(id).classList.add("active")
-      );
-    }
-  }
-
-  setInterval(() => {
-    fetch("http://RASPBERRY_PI_IP:5000/events")
-      .then(res => res.json())
-      .then(data => {
-        const body = document.getElementById("monitoringBody");
-        body.innerHTML = "";
-
-        if(data.length === 0){
-          body.innerHTML = `
-            <tr><td colspan="4" style="text-align:center;color:#888">
-              Waiting for detection events...
-            </td></tr>`;
-          return;
-        }
-
-        data.forEach(e => {
-          body.innerHTML += `
-            <tr>
-              <td>${e.time}</td>
-              <td>${e.zone}</td>
-              <td>${e.status}</td>
-              <td>${e.remark}</td>
-            </tr>`;
-        });
-
-        highlight(data[0].zone);
-
-        const farm = document.getElementById("farmStatus");
-        if(data[0].status !== "Healthy"){
-          farm.textContent = "Farm Status: Problem Detected";
-          farm.classList.add("problem");
-        } else {
-          farm.textContent = "Farm Status: Healthy";
-          farm.classList.remove("problem");
-        }
-      });
-  }, 2000);
-</script>
+<script src="js/monitoring.js"></script>
 
 </body>
 </html>

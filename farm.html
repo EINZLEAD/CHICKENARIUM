@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Settings — CHICKENARIUM</title>
-<link rel="stylesheet" href="Navbar.css">
-<link rel="stylesheet" href="farm.css">
+<link rel="stylesheet" href="css/Navbar.css">
+<link rel="stylesheet" href="css/farm.css">
 </head>
 <body>
 
@@ -26,11 +26,13 @@
 <main class="container">
   <h1>Farm Details</h1>
 
-  <form id="settingsForm">
+    <form id="settingsForm">
 
     <label>Farm Name</label>
     <input type="text" id="farm_name" required>
 
+    <label>Farm ID (Auto-generated)</label>
+    <input type="text" id="farm_id" readonly style="background:#eee; color:#555; border:1px solid #ccc; padding:10px; width:100%; margin-top:5px; border-radius:6px; margin-bottom: 10px;">
     <label>Owner Name</label>
     <input type="text" id="owner_name" required>
 
@@ -40,19 +42,18 @@
     <label>Owner Email</label>
     <input type="email" id="owner_email" required>
 
-    <label>Suspected Threshold</label>
-    <input type="number" id="suspected_threshold" min="1" required>
-
     <label>Farm Location / Address</label>
-    <textarea id="farm_location" rows="3" placeholder="Street, city, region"></textarea>
+    <textarea id="farm_location" rows="3"></textarea>
 
-    <label>Timezone</label>
-    <select id="timezone">
-      <option value="UTC">UTC</option>
-      <option value="America/New_York">America/New_York</option>
-      <option value="Europe/London">Europe/London</option>
-      <option value="Asia/Tokyo">Asia/Tokyo</option>
+    <label>Farm Type</label>
+    <select id="farm_type">
+      <option>Broiler</option>
+      <option>Layer</option>
+      <option>Backyard</option>
     </select>
+
+    <label>Number of Chickens</label>
+    <input type="number" id="number_of_chickens" value="500">
 
     <label>Measurement Units</label>
     <select id="units">
@@ -74,11 +75,10 @@
 
     <button type="submit">Save Settings</button>
   </form>
-
   <p id="msg" class="status"></p>
 </main>
 
-<script src="farm.js"></script>
+<script src="js/farm.js"></script>
 
 <script>
   // Mobile menu toggle

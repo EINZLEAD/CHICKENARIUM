@@ -4,75 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Settings — CHICKENARIUM</title>
-<link rel="stylesheet" href="Navbar.css">
-
-<style>
-body{
-  font-family:Inter,Segoe UI,Arial,sans-serif;
-  margin:0;
-  background:#FFFBF2;
-  color:#222;
-}
-.container{
-  max-width:900px;
-  margin:auto;
-  padding:20px;
-}
-.section{
-  background:#fff;
-  border-radius:10px;
-  padding:20px;
-  margin-bottom:20px;
-  box-shadow:0 4px 10px rgba(0,0,0,.05);
-}
-.section h2{
-  margin-top:0;
-  border-bottom:1px solid #eee;
-  padding-bottom:8px;
-}
-label{
-  display:block;
-  margin-top:12px;
-  font-weight:600;
-}
-input, select, textarea{
-  width:100%;
-  padding:10px;
-  margin-top:4px;
-  border-radius:6px;
-  border:1px solid #ccc;
-}
-input[readonly]{
-  background:#f4f4f4;
-}
-.actions{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-top:20px;
-}
-button{
-  padding:10px 18px;
-  border:none;
-  border-radius:6px;
-  font-weight:600;
-  cursor:pointer;
-}
-.save-btn{
-  background:#F7941E;
-  color:#fff;
-}
-.logout-btn{
-  background:#e53935;
-  color:#fff;
-}
-.small{
-  font-size:.85rem;
-  color:#666;
-}
-</style>
+<link rel="stylesheet" href="css/Navbar.css">
+<link rel="stylesheet" href="css/settings.css">
 </head>
-
 <body>
 
 <header class="topnav">
@@ -90,84 +24,87 @@ button{
 </header>
 
 <main class="container">
-
 <h1>Farm Profile & Settings</h1>
+<p id="msg"></p>
 
-<!-- FARM PROFILE -->
 <div class="section">
 <h2>Farm Information</h2>
-
-<label>Farm Name</label>
-<input type="text" value="Sample Poultry Farm">
+<input type="hidden" id="db_id"> <label>Farm Name</label>
+<input type="text" id="farm_name" placeholder="Loading...">
 
 <label>Farm ID</label>
-<input type="text" value="FARM-2025-001" readonly>
+<input type="text" id="farm_id" readonly style="background:#eee; color:#555; border:1px solid #ccc; padding:10px; width:100%; border-radius:6px; margin-top:4px;">
 
 <label>Farm Type</label>
-<select>
-  <option>Broiler</option>
-  <option>Layer</option>
-  <option>Backyard</option>
+<select id="farm_type">
+  <option value="Broiler">Broiler</option>
+  <option value="Layer">Layer</option>
+  <option value="Backyard">Backyard</option>
 </select>
 
 <label>Number of Chickens</label>
-<input type="number" value="500">
+<input type="number" id="number_of_chickens">
 
 <label>Farm Address</label>
-<textarea rows="3">Barangay Example, City, Province</textarea>
+<textarea id="farm_location" rows="3"></textarea>
 </div>
 
-<!-- OWNER INFO -->
 <div class="section">
 <h2>Owner / Account</h2>
-
 <label>Owner Name</label>
-<input type="text" value="Juan Dela Cruz">
+<input type="text" id="owner_name">
 
 <label>Email</label>
-<input type="email" value="juan@email.com">
+<input type="email" id="owner_email">
 
 <label>Contact Number</label>
-<input type="text" value="+63 9XX XXX XXXX">
+<input type="text" id="owner_phone">
 
 <label>Username</label>
-<input type="text" value="farm_admin" readonly>
+<input type="text" id="username" readonly style="background:#e9ecef; cursor: default;">
 </div>
 
-<!-- SYSTEM INFO -->
-<div class="section">
-<h2>System Information</h2>
-
-<p class="small"><strong>Connected Devices:</strong> Camera, Directional Microphone</p>
-<p class="small"><strong>Last Detection:</strong> 2026-01-30 14:32</p>
-<p class="small"><strong>System Status:</strong> Online</p>
-</div>
-
-<!-- SECURITY -->
 <div class="section">
 <h2>Security</h2>
+<p class="small">Manage your account password.</p>
 
-<label>Change Password</label>
-<input type="password" placeholder="New password">
+<button type="button" id="openPassModalBtn" style="background:#333; color:white; margin-bottom:15px;">
+  🔒 Change Password
+</button>
 
 <div class="actions">
-  <button class="save-btn">Save Changes</button>
-  <button class="logout-btn" onclick="logout()">Logout</button>
+  <button class="save-btn" id="saveBtn">Save Changes</button>
+  <button class="logout-btn" onclick="if(confirm('Logout?')) location.href='login.html'">Logout</button>
 </div>
 </div>
 
 </main>
 
-<script>
-document.getElementById("menuBtn")
- ?.addEventListener("click",()=>siteNav.classList.toggle("open"));
+<div id="passwordModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" id="closePassModal">&times;</span>
+    <h2 style="color:#F7941E; margin-top:0;">Change Password</h2>
+    
+    <form id="changePassForm">
+      <label>Current Password</label>
+      <input type="password" id="current_password" required placeholder="Enter current password">
+      
+      <label>New Password</label>
+      <input type="password" id="new_password" required placeholder="Min. 6 characters">
+      
+      <label>Confirm New Password</label>
+      <input type="password" id="confirm_new_password" required placeholder="Retype new password">
+      
+      <p id="passMsg" style="text-align:center; font-size:0.9rem; margin-top:10px; font-weight:bold;"></p>
+      
+      <button type="submit" class="btn-submit">Update Password</button>
+    </form>
+  </div>
+</div>
 
-function logout(){
-  if(confirm("Are you sure you want to logout?")){
-    // Example only — replace with real backend logout
-    window.location.href = "login.html";
-  }
-}
+<script src="js/settings.js"></script>
+<script>
+document.getElementById("menuBtn")?.addEventListener("click",()=>document.getElementById("siteNav").classList.toggle("open"));
 </script>
 
 </body>
