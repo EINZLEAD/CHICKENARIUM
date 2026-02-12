@@ -2,10 +2,12 @@ body { font-family: Inter, sans-serif; margin: 0; background: #FFFBF2; color: #2
 .container { max-width: 900px; margin: auto; padding: 20px; }
 .section { background: #fff; border-radius: 10px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,.05); }
 .section h2 { margin-top: 0; border-bottom: 1px solid #eee; padding-bottom: 8px; }
+
 label { display: block; margin-top: 12px; font-weight: 600; }
 input, select, textarea { width: 100%; padding: 10px; margin-top: 4px; border-radius: 6px; border: 1px solid #ccc; box-sizing: border-box; }
 input[readonly] { background: #e9ecef; cursor: not-allowed; color: #555; }
 .actions { display: flex; justify-content: space-between; margin-top: 20px; }
+
 button { padding: 10px 18px; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; }
 .save-btn { background: #F7941E; color: #fff; }
 .save-btn:hover { background: #d67d14; }
